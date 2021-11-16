@@ -30,13 +30,14 @@ public class Frog implements IFrog {
 
     @Override
     public void move(Direction key) {
-        if(key == Direction.up && position.ord < game.height-1){
+        if (key == Direction.up && position.ord < game.height - 1) {
             position = new Case(position.absc, position.ord + 1);
-    }else if(key == Direction.left){
-
-        }else if(key == Direction.right){
-
-        }else if(key == Direction.down && position.ord > 0){
+        } else if (key == Direction.left && position.absc > 0) {
+            position = new Case(position.absc - 1, position.ord);
+        } else if (key == Direction.right && position.absc < game.width - 1) {
+            position = new Case(position.absc + 1, position.ord);
+        } else if (key == Direction.down && position.ord > 0) {
             position = new Case(position.absc, position.ord - 1);
         }
+    }
 }
