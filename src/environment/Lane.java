@@ -2,8 +2,9 @@ package environment;
 
 import java.util.ArrayList;
 
-import gameCommons.Case;
+import util.Case;
 import gameCommons.Game;
+import gameCommons.IEnvironment;
 
 public class Lane {
 	private Game game;
@@ -32,7 +33,6 @@ public class Lane {
 	}
 
 	// TODO : ajout de methodes
-
 	/*
 	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
 	 */
