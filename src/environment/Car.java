@@ -5,6 +5,7 @@ import java.awt.Color;
 import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
+import java.util.Random;
 
 public class Car {
 	private Game game;
@@ -16,20 +17,26 @@ public class Car {
 
 	//TODO Constructeur(s)
 	public Car(Game game, Case leftPosition, boolean leftToRight){
+		Random r = new Random();
 		this.game = game;
 		this.leftPosition = leftPosition;
 		this.leftToRight = leftToRight;
-		this.length = 1;
+		this.length = r.nextInt(3) + 1;
+		addToGraphics();
 	}
 
-	public Car(Game game, Case leftPosition, boolean leftToRight, int length){
-		this.game = game;
-		this.leftPosition = leftPosition;
-		this.leftToRight = leftToRight;
-		this.length = length;
+	//TODO : ajout de methods
+	public void setLeftPosition(Case c){
+		this.leftPosition = c;
 	}
 
-	//TODO : ajout de methodes
+	public Case getLeftPosition(){
+		return this.leftPosition;
+	}
+
+	public int getLength(){
+		return this.length;
+	}
 
 	
 	
