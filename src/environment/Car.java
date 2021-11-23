@@ -1,10 +1,9 @@
 package environment;
 
 import java.awt.Color;
-
-import util.Case;
 import gameCommons.Game;
 import graphicalElements.Element;
+import util.Case;
 import java.util.Random;
 
 public class Car {

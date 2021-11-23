@@ -15,11 +15,7 @@ public class Environment implements IEnvironment {
 
     public Environment(Game game){
         this.game = game;
-        voies = new ArrayList<>();
-    }
-
-    public void setVoies(ArrayList<Lane> a){
-        this.voies = a;
+        this.voies = new ArrayList<>();
     }
 
     @Override
@@ -43,8 +39,10 @@ public class Environment implements IEnvironment {
 
     @Override
     public void update() {
-        for(Lane l : voies){
+        for(int i = 1; i < voies.size()-1;i++){
+            Lane l = voies.get(i);
             l.update();
+            voies.set(i, l);
         }
     }
 

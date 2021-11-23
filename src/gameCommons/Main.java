@@ -9,7 +9,7 @@ import javax.swing.Timer;
 import environment.Environment;
 import environment.Lane;
 import frog.Frog;
-import givenEnvironment.GivenEnvironment;
+//import givenEnvironment.GivenEnvironment;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
 

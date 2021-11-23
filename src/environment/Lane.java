@@ -25,28 +25,30 @@ public class Lane {
 	}
 
 	public void update() {
-
-		// TODO
+		addCars();
 		for(int i=0;i < cars.size();i++) {
 			if (leftToRight) {
 				Case c = cars.get(i).getLeftPosition();
-				c = new Case(c.absc+speed, c.ord);
-				if(c.absc < game.width) {
-					cars.get(i).setLeftPosition(c);
+				c = new Case(c.absc+speed, ord);
+				if(c.absc > game.width){
+					cars.remove(i);
+					cars.add(i, new Car(game, new Case(0, ord), leftToRight));
 				}else{
-					mayAddCar();
+					cars.set(i, new Car(game, c, leftToRight));
 				}
 			}else{
 				Case c = cars.get(i).getLeftPosition();
-				c = new Case(c.absc-speed, c.ord);
-				cars.get(i).setLeftPosition(c);
-				if(c.absc + cars.get(i).getLength() > 0) {
-					cars.get(i).setLeftPosition(c);
+				int l = cars.get(i).getLength();
+				c = new Case(c.absc-speed, ord);
+				if(c.absc + l - 1 < 0){
+					cars.remove(i);
+					cars.add(i, new Car(game, new Case(0, ord), leftToRight));
 				}else{
-					mayAddCar();
+					cars.set(i, new Car(game, c, leftToRight));
 				}
 			}
 		}
+	}
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
 		// Notez que cette m�thode est appel�e � chaque tic d'horloge
@@ -56,7 +58,7 @@ public class Lane {
 
 		// A chaque tic d'horloge, une voiture peut �tre ajout�e
 
-	}
+
 
 	// TODO : ajout de methodes
 	public ArrayList<Case> getCaseDeCar(){
@@ -71,6 +73,13 @@ public class Lane {
 			}
 		}
 		return a;
+	}
+
+	public void addCars(){
+		if(cars.isEmpty()){
+			Car a = new Car(game, new Case(0, ord), leftToRight);
+			cars.add(a);
+		}
 	}
 	/*
 	 * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase() 
@@ -89,8 +98,10 @@ public class Lane {
 	}
 
 	private boolean isSafe(Case firstCase) {
-		if(this.getCaseDeCar().contains(firstCase)){
-			return false;
+		for(Car c : cars){
+			if(c.getLeftPosition() == firstCase){
+				return false;
+			}
 		}
 		return true;
 	}

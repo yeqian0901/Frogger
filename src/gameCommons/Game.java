@@ -5,6 +5,7 @@ import java.util.Random;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
+import environment.Environment;
 
 public class Game {
 
@@ -17,7 +18,7 @@ public class Game {
 	public final double defaultDensity;
 
 	// Lien aux objets utilis�s
-	private IEnvironment environment;
+	private Environment environment;
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 
@@ -57,7 +58,7 @@ public class Game {
 	 * 
 	 * @param environment
 	 */
-	public void setEnvironment(IEnvironment environment) {
+	public void setEnvironment(Environment environment) {
 		this.environment = environment;
 	}
 
