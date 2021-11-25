@@ -13,41 +13,35 @@ public class Lane {
 	private ArrayList<Car> cars = new ArrayList<>();
 	private boolean leftToRight;
 	private double density;
+	private int time;
 
 	// TODO : Constructeur(s)
-	public Lane(Game game, int ord, int speed, boolean leftToRight, double density){
+	public Lane(Game game, int ord, double density){
 		this.game = game;
 		this.ord = ord;
-		this.speed = speed;
+		this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
 		this.cars = new ArrayList<>();
-		this.leftToRight = leftToRight;
+		this.leftToRight = game.randomGen.nextBoolean();
 		this.density = density;
+		for(int i = 0; i < game.width * 10; i++){
+			this.move(true);
+			this.mayAddCar();
+		}
+	}
+
+	public Lane(Game game, int ord){
+		this(game, ord, game.defaultDensity);
 	}
 
 	public void update() {
-		addCars();
-		for(int i=0;i < cars.size();i++) {
-			if (leftToRight) {
-				Case c = cars.get(i).getLeftPosition();
-				c = new Case(c.absc+speed, ord);
-				if(c.absc > game.width){
-					cars.remove(i);
-					cars.add(i, new Car(game, new Case(0, ord), leftToRight));
-				}else{
-					cars.set(i, new Car(game, c, leftToRight));
-				}
-			}else{
-				Case c = cars.get(i).getLeftPosition();
-				int l = cars.get(i).getLength();
-				c = new Case(c.absc-speed, ord);
-				if(c.absc + l - 1 < 0){
-					cars.remove(i);
-					cars.add(i, new Car(game, new Case(0, ord), leftToRight));
-				}else{
-					cars.set(i, new Car(game, c, leftToRight));
-				}
-			}
+		this.time++;
+		if(this.time <= this.speed){
+			move(false);
+			return;
 		}
+		this.move(true);
+		this.mayAddCar();
+		this.time = 0;
 	}
 		// Toutes les voitures se d�placent d'une case au bout d'un nombre "tic
 		// d'horloge" �gal � leur vitesse
@@ -61,24 +55,22 @@ public class Lane {
 
 
 	// TODO : ajout de methodes
-	public ArrayList<Case> getCaseDeCar(){
-		ArrayList<Case> a = new ArrayList<>();
-		for(Car i : cars){
-			a.add(i.getLeftPosition());
-			if(i.getLength() > 1){
-				for(int j = 1; j < i.getLength(); j++){
-					Case c = new Case(i.getLeftPosition().absc + j, ord);
-					a.add(c);
-				}
-			}
+	public void move(boolean b){
+		for(Car a : cars){
+			a.moveCar(b);
 		}
-		return a;
+		this.remove();
 	}
 
-	public void addCars(){
-		if(cars.isEmpty()){
-			Car a = new Car(game, new Case(0, ord), leftToRight);
-			cars.add(a);
+	public void remove(){
+		ArrayList<Car> s = new ArrayList<>();
+		for(Car a : cars){
+			if(!a.correct()){
+				s.add(a);
+			}
+		}
+		for(Car b : s){
+			cars.remove(b);
 		}
 	}
 	/*
@@ -97,9 +89,9 @@ public class Lane {
 		}
 	}
 
-	private boolean isSafe(Case firstCase) {
-		for(Car c : cars){
-			if(c.getLeftPosition() == firstCase){
+	public boolean isSafe(Case c) {
+		for(Car a : cars){
+			if(!a.isSafe(c)){
 				return false;
 			}
 		}

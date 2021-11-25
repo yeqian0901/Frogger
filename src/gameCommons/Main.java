@@ -21,7 +21,7 @@ public class Main {
 		int width = 26;
 		int height = 20;
 		int tempo = 100;
-		int minSpeedInTimerLoops = 200; //3
+		int minSpeedInTimerLoops = 100; //3
 		double defaultDensity = 0.1; //0.2
 		
 		//Cr�ation de l'interface graphique

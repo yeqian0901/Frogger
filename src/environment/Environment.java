@@ -16,13 +16,17 @@ public class Environment implements IEnvironment {
     public Environment(Game game){
         this.game = game;
         this.voies = new ArrayList<>();
+        voies.add(new Lane(game,0,0.0));
+        for(int i = 1;i < game.height - 1; i++){
+            voies.add(new Lane(game,i));
+        }
+        voies.add(new Lane(game, game.height-1,0.0));
     }
 
     @Override
     public boolean isSafe(Case c) {
-        for(Lane l : voies){
-            ArrayList<Case> a = l.getCaseDeCar();
-            if(a.contains(c)){
+        for(Lane l : voies) {
+            if(!l.isSafe(c)){
                 return false;
             }
         }
@@ -39,11 +43,8 @@ public class Environment implements IEnvironment {
 
     @Override
     public void update() {
-        for(int i = 1; i < voies.size()-1;i++){
-            Lane l = voies.get(i);
+        for(Lane l : voies){
             l.update();
-            voies.set(i, l);
         }
     }
-
 }
