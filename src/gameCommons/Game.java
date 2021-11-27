@@ -6,6 +6,7 @@ import java.util.Random;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
 import environment.Environment;
+import Infinie.DEnvironment;
 
 public class Game {
 
@@ -16,9 +17,11 @@ public class Game {
 	public final int height;
 	public final int minSpeedInTimerLoops;
 	public final double defaultDensity;
+	public int score;
+	public int scoreMax;
 
 	// Lien aux objets utilis�s
-	private Environment environment;
+	private DEnvironment environment;
 	private IFrog frog;
 	private IFroggerGraphics graphic;
 
@@ -42,6 +45,8 @@ public class Game {
 		this.height = height;
 		this.minSpeedInTimerLoops = minSpeedInTimerLoop;
 		this.defaultDensity = defaultDensity;
+		this.score = 0;
+		this.scoreMax = 0;
 	}
 
 	/**
@@ -58,7 +63,7 @@ public class Game {
 	 * 
 	 * @param environment
 	 */
-	public void setEnvironment(Environment environment) {
+	public void setEnvironment(DEnvironment environment) {
 		this.environment = environment;
 	}
 
@@ -80,7 +85,7 @@ public class Game {
 		if(environment.isSafe(frog.getPosition())){
 			return false;
 		}
-		graphic.endGameScreen("You lose");
+		graphic.endGameScreen("You lose Your score : " + this.scoreMax);
 		return true;
 	}
 
@@ -105,9 +110,12 @@ public class Game {
 	public void update() {
 		graphic.clear();
 		environment.update();
-		this.graphic.add(new Element(frog.getPosition(), Color.GREEN));
+		this.graphic.add(new Element(frog.getPosition().absc,1, Color.GREEN));
 		testLose();
 		testWin();
 	}
 
+	public void addL(){
+		this.environment.addLane();
+	}
 }

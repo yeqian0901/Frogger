@@ -12,6 +12,9 @@ import frog.Frog;
 //import givenEnvironment.GivenEnvironment;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
+import Infinie.IfFrog;
+import Infinie.DEnvironment;
+import Infinie.IfEnvironment;
 
 public class Main {
 
@@ -29,12 +32,15 @@ public class Main {
 		//Cr�ation de la partie
 		Game game = new Game(graphic, width, height, minSpeedInTimerLoops, defaultDensity);
 		//Cr�ation et liason de la grenouille
-		IFrog frog = new Frog(game);
+		IFrog frog = new IfFrog(game);
 		game.setFrog(frog);
 		graphic.setFrog(frog);
 		//Cr�ation et liaison de l'environnement
-		Environment env = new Environment(game);
+		DEnvironment env = new IfEnvironment(game);
 		game.setEnvironment(env);
+		for(int i = 0; i<40;i++){
+			game.update();
+		}
 				
 		//Boucle principale : l'environnement s'acturalise tous les tempo milisecondes
 		Timer timer = new Timer(tempo, new ActionListener() {
