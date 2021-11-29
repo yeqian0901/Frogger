@@ -22,7 +22,7 @@ public class Main {
 
 		//Caract�ristiques du jeu
 		int width = 26;
-		int height = 20;
+		int height = 28;
 		int tempo = 100;
 		int minSpeedInTimerLoops = 100; //3
 		double defaultDensity = 0.1; //0.2

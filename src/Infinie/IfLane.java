@@ -10,13 +10,14 @@ public class IfLane {
     private Game game;
     private int ord;
     private int speed;
-    private ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<IfCar> cars;
     private boolean leftToRight;
     private double density;
     private int time;
 
     // TODO : Constructeur(s)
-    public IfLane(Game game, int ord, double density){
+
+    public IfLane(final Game game, final int ord, final double density) {
         this.game = game;
         this.ord = ord;
         this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
@@ -56,23 +57,24 @@ public class IfLane {
 
     // TODO : ajout de methodes
     public void move(boolean b){
-        for(Car a : cars){
-            a.moveCar(b);
+        for(IfCar a : cars){
+            a.move(b);
         }
         this.remove();
     }
 
     public void remove(){
-        ArrayList<Car> s = new ArrayList<>();
-        for(Car a : cars){
-            if(!a.correct()){
+        ArrayList<IfCar> s = new ArrayList<>();
+        for(final IfCar a : cars){
+            if(!a.appearsInBounds()){
                 s.add(a);
             }
         }
-        for(Car b : s){
+        for(final IfCar b : s){
             cars.remove(b);
         }
     }
+
     /*
      * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase()
      */
@@ -84,14 +86,14 @@ public class IfLane {
     private void mayAddCar() {
         if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
             if (game.randomGen.nextDouble() < density) {
-                cars.add(new Car(game, getBeforeFirstCase(), leftToRight));
+                cars.add(new IfCar(game, getBeforeFirstCase(), leftToRight));
             }
         }
     }
 
     public boolean isSafe(Case c) {
-        for(Car a : cars){
-            if(!a.isSafe(c)){
+        for(IfCar a : cars){
+            if(a.coversCase(c)){
                 return false;
             }
         }
@@ -112,4 +114,9 @@ public class IfLane {
             return new Case(game.width, ord);
     }
 
+
+    @Override
+        public String toString() {
+            return "Lane [ord=" + this.ord + ", cars=" + this.cars + "]";
+        }
 }

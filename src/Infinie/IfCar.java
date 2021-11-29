@@ -11,60 +11,36 @@ public class IfCar {
     private Case leftPosition;
     private boolean leftToRight;
     private int length;
-    private final Color colorLtR = Color.BLACK;
-    private final Color colorRtL = Color.BLUE;
+    private final Color colorLtR;
+    private final Color colorRtL;
 
-    //TODO Constructeur(s)
-    public IfCar(Game game, Case leftPosition, boolean leftToRight){
+    public IfCar(final Game game, final Case frontPosition, final boolean leftToRight) {
+        this.colorLtR = Color.BLACK;
+        this.colorRtL = Color.BLUE;
         this.game = game;
-        this.leftToRight = leftToRight;
         this.length = game.randomGen.nextInt(3) + 1;
-        if(leftToRight){
-            this.leftPosition = new Case(0, leftPosition.ord);
-        }else{
-            this.leftPosition = new Case(game.width - this.length, leftPosition.ord);
-        }
+        this.leftToRight = leftToRight;
+        this.leftPosition = new Case(leftToRight ? (frontPosition.absc - this.length) : frontPosition.absc, frontPosition.ord);
     }
 
-    //TODO : ajout de methods
-    public void moveCar(boolean a){
-        if(a) {
-            if (leftToRight) {
-                this.leftPosition = new Case(this.leftPosition.absc + 1, leftPosition.ord);
-            }else{
-                this.leftPosition = new Case(this.leftPosition.absc - 1, leftPosition.ord);
-            }
+    public void move(final boolean b) {
+        if (b) {
+            this.leftPosition = new Case(this.leftPosition.absc + (this.leftToRight ? 1 : -1), this.leftPosition.ord);
         }
         this.addToGraphics();
     }
 
-    public boolean correct(){
-        if(leftToRight && this.leftPosition.absc < game.width){
-            return true;
-        }else if(!leftToRight && this.leftPosition.absc + this.length > 0){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isSafe(Case c){
-        for(int i = 0;i < this.length;i++){
-            if(this.leftPosition.absc + i == c.absc && this.leftPosition.ord == c.ord){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /* Fourni : addToGraphics() permettant d'ajouter un element graphique correspondant a la voiture*/
     private void addToGraphics() {
-        for (int i = 0; i < length; i++) {
-            Color color = colorRtL;
-            if (this.leftToRight){
-                color = colorLtR;
-            }
-            game.getGraphic()
-                    .add(new Element(leftPosition.absc + i, leftPosition.ord, color));
+        for (int i = 0; i < this.length; ++i) {
+            this.game.getGraphic().add(new Element(this.leftPosition.absc + i, this.leftPosition.ord - this.game.score, this.leftToRight ? this.colorLtR : this.colorRtL));
         }
+    }
+
+    public boolean appearsInBounds() {
+        return this.leftPosition.absc + this.length > 0 || this.leftPosition.absc < this.game.width;
+    }
+
+    public boolean coversCase(final Case pos) {
+        return pos.ord == this.leftPosition.ord && (pos.absc >= this.leftPosition.absc && pos.absc < this.leftPosition.absc + this.length);
     }
 }

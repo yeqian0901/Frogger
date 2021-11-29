@@ -14,7 +14,7 @@ public class IfEnvironment implements DEnvironment {
 
     public IfEnvironment(Game game){
         this.game = game;
-        this.voies = new ArrayList<>();
+        this.voies = new ArrayList<IfLane>();
         voies.add(new IfLane(game,0,0.0));
         voies.add(new IfLane(game,1,0.0));
         for(int i = 2;i < game.height; i++){
@@ -39,15 +39,18 @@ public class IfEnvironment implements DEnvironment {
 
     @Override
     public void update() {
-        for(IfLane l : voies){
+        for(final IfLane l : voies){
             l.update();
         }
     }
 
-    public void addLane(int i){
+    public void addLane(final int i){
         this.voies.add(new IfLane(this.game, i));
     }
+
+    @Override
     public void addLane(){
         this.addLane(this.voies.size());
     }
+
 }

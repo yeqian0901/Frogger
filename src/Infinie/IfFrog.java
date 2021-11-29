@@ -17,40 +17,51 @@ public class IfFrog implements IFrog {
     private Direction direction;
 
 
-    public IfFrog(Game game) {
+    public IfFrog(final Game game) {
         this.game = game;
-        position = new Case(game.width/2, 0);
+        position = new Case(game.width/2, 1);
         direction=Direction.up;
     }
 
+    @Override
     public Case getPosition() {
         return this.position;
     }
 
+    @Override
     public Direction getDirection(){
         return this.direction;
     }
 
-    public void move(Direction key) {
-        this.direction = key;
-        if (key == Direction.up && position.ord < game.height - 1) {
-            position = new Case(position.absc, position.ord + 1);
-            game.score++;
-            if(game.score > game.scoreMax){
-                game.scoreMax = game.score;
-                game.addL();
+    @Override
+    public void move(final Direction key) {
+            this.direction = key;
+            if (key == Direction.up) {
+                this.position = new Case(this.position.absc, this.position.ord + 1);
+                final Game game = this.game;
+                game.score++;
+                if(game.score > game.scoreMax){
+                    game.scoreMax = game.score;
+                    game.addL();
+                }
             }
-            final Game game = this.game;
-        } else if (key == Direction.left && position.absc > 0) {
-            position = new Case(position.absc - 1, position.ord);
-        } else if (key == Direction.right && position.absc < game.width - 1) {
-            position = new Case(position.absc + 1, position.ord);
-        } else if (key == Direction.down && position.ord > 0) {
-            position = new Case(position.absc, position.ord - 1);
-            final Game game2 = this.game;
-            game.score--;
+            if (key == Direction.left && position.absc > 0) {
+                position = new Case(position.absc - 1, position.ord);
+            }
+            if (key == Direction.right && position.absc < game.width - 1) {
+                position = new Case(position.absc + 1, position.ord);
+            }
+            if (key == Direction.down && position.ord > 1) {
+                position = new Case(position.absc, position.ord - 1);
+                final Game game2 = this.game;
+                game2.score--;
+            }
+            this.game.getGraphic().add(new Element(this.position.absc, 1, Color.GREEN));
+            this.game.testLose();
+            this.game.testWin();
+            System.out.println(String.valueOf(this.position.absc) + " " + this.position.ord + " score : " + this.game.score);
         }
+
+
+
     }
-
-
-}

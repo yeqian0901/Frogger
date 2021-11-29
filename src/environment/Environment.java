@@ -47,4 +47,8 @@ public class Environment implements IEnvironment {
             l.update();
         }
     }
+
+    public void addLane(){
+        return;
+    }
 }
