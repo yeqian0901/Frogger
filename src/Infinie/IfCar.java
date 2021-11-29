@@ -14,18 +14,26 @@ public class IfCar {
     private final Color colorLtR;
     private final Color colorRtL;
 
-    public IfCar(final Game game, final Case frontPosition, final boolean leftToRight) {
+    public IfCar(final Game game, final Case leftPosition, final boolean leftToRight) {
         this.colorLtR = Color.BLACK;
         this.colorRtL = Color.BLUE;
         this.game = game;
         this.length = game.randomGen.nextInt(3) + 1;
         this.leftToRight = leftToRight;
-        this.leftPosition = new Case(leftToRight ? (frontPosition.absc - this.length) : frontPosition.absc, frontPosition.ord);
+        if(leftToRight){
+            this.leftPosition = new Case(0, leftPosition.ord);
+        }else{
+            this.leftPosition = new Case(game.width - this.length, leftPosition.ord);
+        }
     }
 
     public void move(final boolean b) {
-        if (b) {
-            this.leftPosition = new Case(this.leftPosition.absc + (this.leftToRight ? 1 : -1), this.leftPosition.ord);
+        if(b) {
+            if (this.leftToRight) {
+                this.leftPosition = new Case(this.leftPosition.absc + 1, leftPosition.ord);
+            }else{
+                this.leftPosition = new Case(this.leftPosition.absc - 1, leftPosition.ord);
+            }
         }
         this.addToGraphics();
     }
@@ -36,11 +44,21 @@ public class IfCar {
         }
     }
 
-    public boolean appearsInBounds() {
-        return this.leftPosition.absc + this.length > 0 || this.leftPosition.absc < this.game.width;
+    public boolean correct() {
+        if(leftToRight && this.leftPosition.absc < game.width){
+            return true;
+        }else if(!leftToRight && this.leftPosition.absc + this.length > 0){
+            return true;
+        }
+        return false;
     }
 
-    public boolean coversCase(final Case pos) {
-        return pos.ord == this.leftPosition.ord && (pos.absc >= this.leftPosition.absc && pos.absc < this.leftPosition.absc + this.length);
+    public boolean isSafe(final Case c) {
+        for(int i = 0;i < this.length;i++){
+            if(this.leftPosition.absc + i == c.absc && this.leftPosition.ord == c.ord){
+                return false;
+            }
+        }
+        return true;
     }
 }

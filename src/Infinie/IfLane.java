@@ -24,10 +24,10 @@ public class IfLane {
         this.cars = new ArrayList<>();
         this.leftToRight = game.randomGen.nextBoolean();
         this.density = density;
-        for(int i = 0; i < 40; i++){
+        for(int i = 0; i < 50; i++){
             this.move(true);
             this.mayAddCar();
-        }
+        }//decider density de car
     }
 
     public IfLane(Game game, int ord){
@@ -66,7 +66,7 @@ public class IfLane {
     public void remove(){
         ArrayList<IfCar> s = new ArrayList<>();
         for(final IfCar a : cars){
-            if(!a.appearsInBounds()){
+            if(!a.correct()){
                 s.add(a);
             }
         }
@@ -93,7 +93,7 @@ public class IfLane {
 
     public boolean isSafe(Case c) {
         for(IfCar a : cars){
-            if(a.coversCase(c)){
+            if(!a.isSafe(c)){
                 return false;
             }
         }
