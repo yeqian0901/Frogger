@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import gameCommons.IFrog;
 import util.Case;
-import gameCommons.Game;
 import gameCommons.IEnvironment;
 
 public class Environment implements IEnvironment {
@@ -48,7 +47,4 @@ public class Environment implements IEnvironment {
         }
     }
 
-    public void addLane(){
-        return;
-    }
 }

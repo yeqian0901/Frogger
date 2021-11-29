@@ -1,7 +1,6 @@
 package environment;
 
 import java.awt.Color;
-import gameCommons.Game;
 import graphicalElements.Element;
 import util.Case;
 

@@ -1,6 +1,6 @@
 package frog;
 
-import gameCommons.Game;
+import environment.Game;
 import gameCommons.IFrog;
 import util.Case;
 import util.Direction;
