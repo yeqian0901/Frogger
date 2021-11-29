@@ -15,6 +15,8 @@ public class Car {
 
 	//TODO Constructeur(s)
 	public Car(Game game, Case leftPosition, boolean leftToRight){
+		final Color colorLtR = Color.BLACK;
+		final Color colorRtL = Color.BLUE;
 		this.game = game;
 		this.leftToRight = leftToRight;
 		this.length = game.randomGen.nextInt(3) + 1;
