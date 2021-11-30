@@ -82,8 +82,8 @@ public class Game {
                 return false;
             }
             long end = System.currentTimeMillis();
-            System.out.println("You lose\n" + "Time :" + (end - this.time)/1000);
-            System.exit(1);
+            System.out.println("You lose\n" + "Time : " + (end - this.time)/1000 + "s");
+            System.exit(0);
             return true;
         }
 
@@ -97,7 +97,7 @@ public class Game {
             if(environment.isWinningPosition(frog.getPosition())){
                 long end = System.currentTimeMillis();
                 System.out.println((end - this.time)/1000);
-                System.exit(1);
+                System.exit(0);
                 return true;
             }
             return false;
