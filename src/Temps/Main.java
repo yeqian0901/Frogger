@@ -1,20 +1,14 @@
-package environment;
+package Temps;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-import environment.Environment;
-import environment.Lane;
 import frog.Frog;
 //import givenEnvironment.GivenEnvironment;
 import graphicalElements.FroggerGraphic;
 import graphicalElements.IFroggerGraphics;
-import Infinie.IfFrog;
-import Infinie.DEnvironment;
-import Infinie.IfEnvironment;
 import gameCommons.IFrog;
 import gameCommons.IEnvironment;
 

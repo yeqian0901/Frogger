@@ -1,18 +1,16 @@
-package frog;
+package partie2;
 
-import Temps.Game;
 import gameCommons.IFrog;
 import util.Case;
 import util.Direction;
 
-public class Frog implements IFrog {
-	
-	private Game game;
-	private Case position;
-	private Direction direction;
+public class Frog2 implements IFrog {
+    private Game2 game;
+    private Case position;
+    private Direction direction;
 
 
-    public Frog(Game game) {
+    public Frog2(Game2 game) {
         this.game = game;
         position = new Case(game.width/2, 0);
         direction=Direction.up;

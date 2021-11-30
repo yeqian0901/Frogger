@@ -2,14 +2,8 @@ package Infinie;
 
 import gameCommons.Game;
 import gameCommons.IFrog;
-import graphicalElements.Element;
 import util.Case;
 import util.Direction;
-import graphicalElements.Element;
-import graphicalElements.IFroggerGraphics;
-import environment.Environment;
-
-import java.awt.*;
 
 public class IfFrog implements IFrog {
     private Game game;

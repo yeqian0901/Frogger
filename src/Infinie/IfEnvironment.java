@@ -1,11 +1,8 @@
 package Infinie;
 
-import environment.Lane;
 import gameCommons.Game;
-import graphicalElements.Element;
 import util.Case;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class IfEnvironment implements DEnvironment {

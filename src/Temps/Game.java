@@ -1,15 +1,12 @@
-package environment;
+package Temps;
 
-import Infinie.DEnvironment;
 import gameCommons.IFrog;
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
-import gameCommons.IFrog;
 import gameCommons.IEnvironment;
 
 import java.awt.*;
 import java.util.Random;
-import java.util.Calendar;
 
 public class Game {
         public final Random randomGen = new Random();
@@ -85,7 +82,8 @@ public class Game {
                 return false;
             }
             long end = System.currentTimeMillis();
-            graphic.endGameScreen("You lose Time :" + (end - this.time)/1000 +"s");
+            System.out.println("You lose\n" + "Time :" + (end - this.time)/1000);
+            System.exit(1);
             return true;
         }
 
@@ -98,8 +96,8 @@ public class Game {
         public boolean testWin() {
             if(environment.isWinningPosition(frog.getPosition())){
                 long end = System.currentTimeMillis();
-                long a = (end - this.time)/1000;
-                graphic.endGameScreen("You win Time :" + a + "s");
+                System.out.println((end - this.time)/1000);
+                System.exit(1);
                 return true;
             }
             return false;

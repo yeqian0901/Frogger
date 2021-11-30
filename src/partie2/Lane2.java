@@ -1,35 +1,33 @@
-package Infinie;
+package partie2;
 
-import gameCommons.Game;
 import util.Case;
 
 import java.util.ArrayList;
 
-public class IfLane {
-    private Game game;
+public class Lane2 {
+    private Game2 game;
     private int ord;
     private int speed;
-    private ArrayList<IfCar> cars;
+    private ArrayList<Car2> cars = new ArrayList<>();
     private boolean leftToRight;
     private double density;
     private int time;
 
     // TODO : Constructeur(s)
-
-    public IfLane(final Game game, final int ord, final double density) {
+    public Lane2(Game2 game, int ord, double density){
         this.game = game;
         this.ord = ord;
         this.speed = game.randomGen.nextInt(game.minSpeedInTimerLoops) + 1;
         this.cars = new ArrayList<>();
         this.leftToRight = game.randomGen.nextBoolean();
         this.density = density;
-        for(int i = 0; i < 50; i++){
+        for(int i = 0; i < game.width * 10; i++){
             this.move(true);
             this.mayAddCar();
-        }//decider density de car
+        }
     }
 
-    public IfLane(Game game, int ord){
+    public Lane2(Game2 game, int ord){
         this(game, ord, game.defaultDensity);
     }
 
@@ -56,24 +54,23 @@ public class IfLane {
 
     // TODO : ajout de methodes
     public void move(boolean b){
-        for(IfCar a : cars){
-            a.move(b);
+        for(Car2 a : cars){
+            a.moveCar(b);
         }
         this.remove();
     }
 
     public void remove(){
-        ArrayList<IfCar> s = new ArrayList<>();
-        for(final IfCar a : cars){
+        ArrayList<Car2> s = new ArrayList<>();
+        for(Car2 a : cars){
             if(!a.correct()){
                 s.add(a);
             }
         }
-        for(final IfCar b : s){
+        for(Car2 b : s){
             cars.remove(b);
         }
     }
-
     /*
      * Fourni : mayAddCar(), getFirstCase() et getBeforeFirstCase()
      */
@@ -85,13 +82,13 @@ public class IfLane {
     private void mayAddCar() {
         if (isSafe(getFirstCase()) && isSafe(getBeforeFirstCase())) {
             if (game.randomGen.nextDouble() < density) {
-                cars.add(new IfCar(game, getBeforeFirstCase(), leftToRight));
+                cars.add(new Car2(game, getBeforeFirstCase(), leftToRight));
             }
         }
     }
 
     public boolean isSafe(Case c) {
-        for(IfCar a : cars){
+        for(Car2 a : cars){
             if(!a.isSafe(c)){
                 return false;
             }
@@ -113,9 +110,4 @@ public class IfLane {
             return new Case(game.width, ord);
     }
 
-
-    @Override
-        public String toString() {
-            return "Lane [ord=" + this.ord + ", cars=" + this.cars + "]";
-        }
 }

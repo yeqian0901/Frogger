@@ -1,8 +1,7 @@
-package environment;
+package Temps;
 
 import java.util.ArrayList;
 
-import gameCommons.IFrog;
 import util.Case;
 import gameCommons.IEnvironment;
 

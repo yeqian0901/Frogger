@@ -1,9 +1,8 @@
-package environment;
+package Temps;
 
 import java.util.ArrayList;
 
 import util.Case;
-import gameCommons.IEnvironment;
 
 public class Lane {
 	private Game game;

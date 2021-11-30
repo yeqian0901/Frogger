@@ -5,7 +5,6 @@ import java.util.Random;
 
 import graphicalElements.Element;
 import graphicalElements.IFroggerGraphics;
-import environment.Environment;
 import Infinie.DEnvironment;
 
 public class Game {
