@@ -62,6 +62,7 @@ public class FroggerGraphic2 extends JPanel implements IFroggerGraphics2, KeyLis
 			break;
 		case KeyEvent.VK_RIGHT:
 			frog1.move(Direction.right);
+			break;
 			case KeyEvent.VK_W:
 				frog2.move(Direction.up);
 				break;

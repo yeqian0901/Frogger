@@ -1,7 +1,5 @@
 package twoplayer;
 
-import Temps.Game;
-import Temps.Lane;
 import gameCommons.IEnvironment;
 import util.Case;
 

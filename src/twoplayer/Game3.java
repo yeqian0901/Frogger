@@ -78,7 +78,7 @@ public class Game3 {
      * @return true si le partie est perdue
      */
     public boolean testLose() {
-        if(environment.isSafe(frog1.getPosition()) || environment.isSafe(frog2.getPosition())){
+        if(environment.isSafe(frog1.getPosition()) && environment.isSafe(frog2.getPosition())){
             return false;
         }
         graphic.endGameScreen("You lose");
