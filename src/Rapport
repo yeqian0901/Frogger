@@ -1,0 +1,36 @@
+Liste de fonctions finis:
+Partie 1:
+    Frog.java : void move()
+        utilise le clavier de déplacer le grenouille
+    Game.java : boolean testLose()
+        Si le grenouille déplacer sur les voitures, il échoue
+                boolean testWin()
+        Si le grenouille gagne à déplacer à la dernier ligne, il gagne
+Partie 2: (package partie2)
+    Car2.java : Constructeur(Game2 game, Case leftPosition, boolean leftToRight)
+        Créer une nouvelle voiture
+                void moveCar(boolean a)
+        Si "a = true" cette voiture déplace une fois(Case est décide par Lane), si "a = false" ne déplace pas
+                boolean correct()
+        Détermine la position de voiture est bien dans le Game, si "leftPosition.absc < game.width" ou "leftPosition.absc + this.length > 0" return true
+                boolean isSafe(Case c)
+        Détermine s'il y a une voiture dans ce Case, si c est dans le cadre de voiture return false
+    Lane2.java : Constructeur(Game2 game, int ord, double density)
+        Créer une nouvelle ligne pour déplacer les voitures
+                void update()
+        D'après le speed et puis décide si les voitures bougent dans ce  "tic d'horloge"
+                void move(boolean b)
+        Si "a = true" les voitures dans "cars" déplace une fois(la destination de Case est décide par Lane), si "a = false" ne déplace pas
+                void remove()
+        Supprimer les voitures qui ne sont pas correctes dans la list
+                boolean isSafe(Case c)
+        Détermine s'il y a une voiture dans ce Case, si c est dans le cadre d'une voitures return false
+    Environment2.java : Constructeur(Game2 game)
+        Créer une nouveau environment pour déplacer les lignes
+                boolean isSafe(Case c)
+        Idem que Lane2.isSafe(c)
+                boolean isWinningPosition(Case c)
+        Définit que les Cases de la dernière ligne sont les positions gagnées
+                void update()
+        Mise à jour tous les lignes dans chacun "tic d'horloge"
+Partie 3 : (package infinie)
