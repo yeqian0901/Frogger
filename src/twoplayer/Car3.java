@@ -1,6 +1,5 @@
 package twoplayer;
 
-import Temps.Game;
 import graphicalElements.Element;
 import util.Case;
 

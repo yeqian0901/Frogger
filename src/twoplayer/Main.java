@@ -1,7 +1,5 @@
 package twoplayer;
 
-import Temps.Environment;
-import frog.Frog;
 import gameCommons.IEnvironment;
 import gameCommons.IFrog;
 import graphicalElements.FroggerGraphic2;

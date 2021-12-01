@@ -1,6 +1,6 @@
 package frog;
 
-import Temps.Game;
+import temps.Game;
 import gameCommons.IFrog;
 import util.Case;
 import util.Direction;

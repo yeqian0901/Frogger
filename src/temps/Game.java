@@ -1,4 +1,4 @@
-package Temps;
+package temps;
 
 import gameCommons.IFrog;
 import graphicalElements.Element;
