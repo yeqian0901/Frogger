@@ -76,4 +76,15 @@ Partie 5.1 : (package twoplayer)
         Mettre un grenouille vert, un grenouille rouge
     (Change les type des attributs dans Car3.java, Lane3.java et Environment3.java aussi)
 
+Problemes:
+1.Quand on a exécute "main" de Partie2, il n'affiche pas les voitures
+Solution:N'oublie pas d'ajoute le methode "addToGraphics()" dans le methode de bouger les voitures
+2.Le graphique de Partie3 ne bouge pas
+Solution:Réécrit le contructeur de IfCar.java
+3.Dans Partie5.1, le deuxième grenouiil ne bouge jamais
+Solution:Ajoute "break" dans tous les case sauf le dernier
+
+Difficultés:
+  Si j'ai essayé d'affiche le temps d'exécution de jeu dans le EndScreen, il toujours change et sans arrêt d'affiche dans la même position
+
 
