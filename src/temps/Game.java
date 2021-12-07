@@ -96,7 +96,7 @@ public class Game {
         public boolean testWin() {
             if(environment.isWinningPosition(frog.getPosition())){
                 long end = System.currentTimeMillis();
-                System.out.println((end - this.time)/1000);
+                System.out.println("You Win\n" + "Time : " + (end - this.time)/1000 + "s");
                 System.exit(0);
                 return true;
             }
